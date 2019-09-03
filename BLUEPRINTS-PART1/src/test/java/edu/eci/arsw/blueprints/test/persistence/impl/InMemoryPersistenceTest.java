@@ -74,17 +74,17 @@ public class InMemoryPersistenceTest {
         Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
         Blueprint bp=new Blueprint("john", "thepaint",pts);
         ibpp.saveBlueprint(bp);
-        ibpp.getBlueprint("john", "thepaint");
         assertTrue(bp.equals(ibpp.getBlueprint("john", "thepaint")));
     }
-
+    
+    
     @Test
     public void showBlueprintWithAuthor() throws BlueprintPersistenceException, BlueprintNotFoundException {
         InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
         Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
         Blueprint bp=new Blueprint("john", "thepaint",pts);
         ibpp.saveBlueprint(bp);
-        assertEquals(bp,ibpp.getBlueprintByAuthor("thepaint"));
+        assertTrue(ibpp.getBlueprintByAuthor("john").contains(bp));
     }
     
 }

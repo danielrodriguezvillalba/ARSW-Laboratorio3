@@ -10,6 +10,7 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
+import java.security.Key;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         }
         else{
             blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        }        
+        } 
     }
 
     @Override
@@ -46,16 +47,16 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return blueprints.get(new Tuple<>(author, bprintname));
     }
 
+    @Override
     public Set<Blueprint> getBlueprintByAuthor(String author){
+        
         Set<Blueprint> temporal = new HashSet<>();
-        for(int i = 0 ; 0 < blueprints.size();i++){
-            try{
-                if(blueprints.get(i).getAuthor().equals(author)){temporal.add(blueprints.get(i));}
-            }catch(NullPointerException e){
-                
-            }
+        System.out.println(blueprints.values().size());
+        for(int i = 1 ; i < blueprints.values().size();i++){
+            Blueprint bluT = (Blueprint) blueprints.values().toArray()[i];
+            System.out.println(bluT.getAuthor() == author);
+            if(bluT.getAuthor() == author){temporal.add(bluT);}
         }
         return temporal;
     }
-    
 }
