@@ -15,11 +15,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author hcadavid
  */
+@Service
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
@@ -49,13 +51,10 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     @Override
     public Set<Blueprint> getBlueprintByAuthor(String author){
-        
         Set<Blueprint> temporal = new HashSet<>();
-        System.out.println(blueprints.values().size());
         for(int i = 1 ; i < blueprints.values().size();i++){
             Blueprint bluT = (Blueprint) blueprints.values().toArray()[i];
-            System.out.println(bluT.getAuthor() == author);
-            if(bluT.getAuthor() == author){temporal.add(bluT);}
+            if(bluT.getAuthor() == author){temporal.add(bluT);} 
         }
         return temporal;
     }

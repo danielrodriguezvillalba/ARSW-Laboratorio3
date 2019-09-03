@@ -83,8 +83,11 @@ public class InMemoryPersistenceTest {
         InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
         Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
         Blueprint bp=new Blueprint("john", "thepaint",pts);
+        Blueprint bp1=new Blueprint("john", "hello",pts);
+        ibpp.saveBlueprint(bp1);
         ibpp.saveBlueprint(bp);
         assertTrue(ibpp.getBlueprintByAuthor("john").contains(bp));
+        assertTrue(ibpp.getBlueprintByAuthor("john").contains(bp1));
     }
     
 }

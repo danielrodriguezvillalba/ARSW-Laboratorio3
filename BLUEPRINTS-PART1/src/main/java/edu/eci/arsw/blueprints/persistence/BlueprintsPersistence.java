@@ -7,13 +7,11 @@ package edu.eci.arsw.blueprints.persistence;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
 import java.util.Set;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author hcadavid
  */
-@Service
 public interface BlueprintsPersistence {
     
     /**
