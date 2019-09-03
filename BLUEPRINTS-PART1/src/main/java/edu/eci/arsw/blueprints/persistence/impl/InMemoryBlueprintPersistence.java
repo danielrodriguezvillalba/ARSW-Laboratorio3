@@ -49,7 +49,11 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     public Set<Blueprint> getBlueprintByAuthor(String author){
         Set<Blueprint> temporal = new HashSet<>();
         for(int i = 0 ; 0 < blueprints.size();i++){
-            if(blueprints.get(i).getAuthor().equals(author)){temporal.add(blueprints.get(i));}
+            try{
+                if(blueprints.get(i).getAuthor().equals(author)){temporal.add(blueprints.get(i));}
+            }catch(NullPointerException e){
+                
+            }
         }
         return temporal;
     }
