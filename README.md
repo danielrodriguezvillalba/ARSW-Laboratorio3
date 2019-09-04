@@ -10,7 +10,7 @@
   - Compilar: Use el comando `mvn package`
   - Ejecutar Pruebas: Use el comando `mvn test`
   
-## Introduction to Spring and Configuration using annotations
+# Introduction to Spring and Configuration using annotations
 ## Part I - Basic workshop 
 
   To illustrate the use of the Spring framework, and the development environment for its use through Maven (and NetBeans), the              configuration of a text analysis application will be made, which makes use of a grammar verifier that requires a spelling checker. The grammar checker will be injected, at the time of execution, with the spelling checker required (for now, there are two available: English and Spanish).
@@ -79,7 +79,9 @@ public class SpanishSpellChecker implements SpellChecker {
   `
   Spell checking output:revisando (la la la ) con el verificador de sintaxis del espanolPlagiarism checking output: Not available yet
   `
-
+  
+  
+# Blueprint Management 1
 ## Part II
 
   1.  Modify the configuration with annotations so that the Bean 'GrammarChecker' now makes use of the SpanishSpellChecker class (so that GrammarChecker is injected with EnglishSpellChecker instead of SpanishSpellChecker.) Verify the new result.
