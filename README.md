@@ -20,8 +20,8 @@
 
   3.  Making use of the Spring configuration based on annotations mark with the annotations @Autowired and @Service the dependencies that must be injected, and the 'beans' candidates to be injected -respectively-:
 
-    - GrammarChecker will be a bean, which depends on something like 'SpellChecker'.
-    - EnglishSpellChecker and SpanishSpellChecker are the two possible candidates to be injected. One must be selected, or another, but NOT both (there would be dependency resolution conflict). For now, have EnglishSpellChecker used. 
+      - GrammarChecker will be a bean, which depends on something like 'SpellChecker'.
+      - EnglishSpellChecker and SpanishSpellChecker are the two possible candidates to be injected. One must be selected, or another, but NOT both (there would be dependency resolution conflict). For now, have EnglishSpellChecker used. 
 
   4.  Make a test program, where an instance of GrammarChecker is created by Spring, and use it:
   
