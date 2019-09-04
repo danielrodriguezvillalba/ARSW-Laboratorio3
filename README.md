@@ -143,76 +143,83 @@ The above requires:
   
   3.  You want the plan query operations to perform a filtering process, before returning the planes consulted. These filters are looking to reduce the size of the plans, removing redundant data or simply sub-sampling, before returning them. Adjust the application (adding the abstractions and implementations you consider) so that the BlueprintServices class is injected with one of two possible 'filters' (or possible future filters). The use of more than one at a time is not contemplated:
   
-1.	(A) Redundancy filtering: deletes consecutive points from the plane that are repeated.
+-	(A) Redundancy filtering: deletes consecutive points from the plane that are repeated.
       
-  ```
-  @Service
-public class RedundancyFiltering implements Filter {
+```
+	  @Service
+	public class RedundancyFiltering implements Filter {
 
-    @Override
-    public Blueprint filtrar(Blueprint bp) {
-        List<Point> actual = bp.getPoints();
-        Point[] nueva = new Point[bp.getPoints().size()];
-        int i = 0;
-        int con = 0;
-        for (Point p : actual) {
-            boolean var = false;
-            if (nueva.length > 0) {
-                for (int j = 0; j < nueva.length; j++) {
-                    if (nueva[j] != null) {
-                        if (nueva[j].getX() == p.getX() && nueva[j].getY() == p.getY()) {var = true;}
-                    }
-                }
-            }
-            if (!var) {
-                nueva[i] = p;
-                con++;
-                i++;
-            }
-        }
-        Point[] cont = new Point[con];
-        for (int j = 0; j < con; j++) {
-                cont[j]=nueva[j];
-                System.out.println(cont[j].getX());
-                System.out.println(cont[j].getY());
-         }
-        Blueprint finala = new Blueprint(bp.getAuthor(), bp.getName(), cont);
-        return finala;
-    }
-}
-  ```
+	    @Override
+	    public Blueprint filtrar(Blueprint bp) {
+		List<Point> actual = bp.getPoints();
+		Point[] nueva = new Point[bp.getPoints().size()];
+		int i = 0;
+		int con = 0;
+		for (Point p : actual) {
+		    boolean var = false;
+		    if (nueva.length > 0) {
+			for (int j = 0; j < nueva.length; j++) {
+			    if (nueva[j] != null) {
+				if (nueva[j].getX() == p.getX() && nueva[j].getY() == p.getY()) {var = true;}
+			    }
+			}
+		    }
+		    if (!var) {
+			nueva[i] = p;
+			con++;
+			i++;
+		    }
+		}
+		Point[] cont = new Point[con];
+		for (int j = 0; j < con; j++) {
+			cont[j]=nueva[j];
+			System.out.println(cont[j].getX());
+			System.out.println(cont[j].getY());
+		 }
+		Blueprint finala = new Blueprint(bp.getAuthor(), bp.getName(), cont);
+		return finala;
+	    }
+	}
+```
   
-2.	(B) Subsampling filtering: suppresses 1 out of every 2 points in the plane, interspersed. 	
+  
+-	(B) Subsampling filtering: suppresses 1 out of every 2 points in the plane, interspersed. 	
       
-  ```
-  @Service
-public class SubsamplingFiltering implements Filter{
 
-    @Override
-    public Blueprint filtrar(Blueprint bp) {
-        List<Point> actual = bp.getPoints();
-        Point[] nueva = new Point[bp.getPoints().size()];
-        boolean flag = true;
-        int i = 0;
-        int con = 0;
-        for (Point p : actual){
-            if(!flag){
-                nueva[i] = p;
-                flag = true;
-                i++;
-                con++;
-            }
-            else{flag = false;}
-        }
-        Point[] fixedArray = new Point[con];
-        for (int j = 0; j < con; j++) {
-        	fixedArray[j]=nueva[j];            
-     }
-        Blueprint finala = new Blueprint(bp.getAuthor(), bp.getName(), fixedArray);
-        return finala;
-    }       
-}
-  ```
+
+
+
+
+```
+
+	  @Service
+	public class SubsamplingFiltering implements Filter{
+
+	    @Override
+	    public Blueprint filtrar(Blueprint bp) {
+		List<Point> actual = bp.getPoints();
+		Point[] nueva = new Point[bp.getPoints().size()];
+		boolean flag = true;
+		int i = 0;
+		int con = 0;
+		for (Point p : actual){
+		    if(!flag){
+			nueva[i] = p;
+			flag = true;
+			i++;
+			con++;
+		    }
+		    else{flag = false;}
+		}
+		Point[] fixedArray = new Point[con];
+		for (int j = 0; j < con; j++) {
+			fixedArray[j]=nueva[j];            
+	     }
+		Blueprint finala = new Blueprint(bp.getAuthor(), bp.getName(), fixedArray);
+		return finala;
+	    }       
+	}
+	  ```
   4.  Add the corresponding tests to each of these filters, and test its operation in the test program, verifying that only by changing the position of the annotations - without changing anything else - the program returns the filtered planes in the way (A) or in the way (B).
   
   ```
