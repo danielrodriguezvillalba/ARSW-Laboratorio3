@@ -104,12 +104,7 @@ public class InMemoryPersistenceTest {
         Blueprint bp1=new Blueprint("dani", "futhenchi",pts1);
         imbp.saveBlueprint(bp0);
         imbp.saveBlueprint(bp1);
-        Blueprint bpToTest = rf.filtrar(imbp.getBlueprint("nico", "dracken"));
-//        System.out.println(bpToTest.getPoints().toArray().toString());
-//        System.out.println(new Object[]{new Point(40, 40),new Point(15, 15), new Point(30, 30)}.toString());
-//        String t = new String("b");
-//        System.out.println("b"==t);
-        
+        Blueprint bpToTest = rf.filtrar(imbp.getBlueprint("nico", "dracken"));//        
         assertTrue(bpToTest.equals(bp1)); 
     }
     
