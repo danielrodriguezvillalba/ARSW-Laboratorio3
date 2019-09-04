@@ -79,9 +79,8 @@ public class SpanishSpellChecker implements SpellChecker {
   `
   Spell checking output:revisando (la la la ) con el verificador de sintaxis del espanolPlagiarism checking output: Not available yet
   `
-  
-  
-# Blueprint Management 1
+    
+
 ## Part II
 
   1.  Modify the configuration with annotations so that the Bean 'GrammarChecker' now makes use of the SpanishSpellChecker class (so that GrammarChecker is injected with EnglishSpellChecker instead of SpanishSpellChecker.) Verify the new result.
@@ -106,7 +105,9 @@ public class EnglishSpellChecker implements SpellChecker {
 Spell checking output:Checked with english checker:la la la Plagiarism checking output: Not available yet
 `
   
-## Blueprint Management 1
+  
+  
+# Blueprint Management 1
 ## Part I
 
 Configure the application to work under a dependency injection scheme, as shown in the previous diagram.
