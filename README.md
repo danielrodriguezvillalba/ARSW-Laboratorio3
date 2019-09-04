@@ -7,6 +7,6 @@
   ```
 ## Compile and run instructions:
 
-  -Compilar: Use el comando mvn package
-  -Ejecutar Pruebas: Use el comando mvn test
+  - Compilar: Use el comando mvn package
+  - Ejecutar Pruebas: Use el comando mvn test
   
