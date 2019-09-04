@@ -5,6 +5,8 @@
  */
 package edu.eci.arsw.blueprints.test.persistence.impl;
 
+import edu.eci.arsw.blueprints.filters.impl.RedundancyFiltering;
+import edu.eci.arsw.blueprints.filters.impl.SubsamplingFiltering;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
@@ -88,6 +90,43 @@ public class InMemoryPersistenceTest {
         ibpp.saveBlueprint(bp);
         assertTrue(ibpp.getBlueprintByAuthor("john").contains(bp));
         assertTrue(ibpp.getBlueprintByAuthor("john").contains(bp1));
+    }
+    
+    @Test
+    public void pruebaFiltroRedundancia() throws BlueprintPersistenceException, BlueprintNotFoundException{
+        InMemoryBlueprintPersistence imbp=new InMemoryBlueprintPersistence();
+        RedundancyFiltering rf = new RedundancyFiltering();
+//      Blueprint with redundancy.
+        Point[] pts0=new Point[]{new Point(40, 40),new Point(15, 15), new Point(40, 40), new Point(40, 40), new Point(15, 15), new Point(30, 30)};
+        Blueprint bp0=new Blueprint("nico", "dracken",pts0);
+//      Blueprint without redundancy, the one being compared to.
+        Point[] pts1=new Point[]{new Point(40, 40),new Point(15, 15), new Point(30, 30)};
+        Blueprint bp1=new Blueprint("dani", "futhenchi",pts1);
+        imbp.saveBlueprint(bp0);
+        imbp.saveBlueprint(bp1);
+        Blueprint bpToTest = rf.filtrar(imbp.getBlueprint("nico", "dracken"));
+//        System.out.println(bpToTest.getPoints().toArray().toString());
+//        System.out.println(new Object[]{new Point(40, 40),new Point(15, 15), new Point(30, 30)}.toString());
+//        String t = new String("b");
+//        System.out.println("b"==t);
+        
+        assertTrue(bpToTest.equals(bp1)); 
+    }
+    
+    @Test
+    public void pruebaFiltroSubSampling() throws BlueprintPersistenceException, BlueprintNotFoundException{
+    	InMemoryBlueprintPersistence imbp2=new InMemoryBlueprintPersistence();
+    	SubsamplingFiltering ssf = new SubsamplingFiltering();
+//      Blueprint to filter with the subsampling filter.
+    	Point[] pts0=new Point[]{new Point(10, 10),new Point(20, 20), new Point(30, 30), new Point(40, 40), new Point(50, 50), new Point(60, 60)};
+        Blueprint bp0=new Blueprint("nico", "dracken",pts0);
+//      Expected Blueprint, the one being compared to.
+        Point[] pts1=new Point[]{new Point(20, 20),new Point(40, 40), new Point(60, 60)};
+        Blueprint bp1=new Blueprint("dani", "futhenchi",pts1);
+        imbp2.saveBlueprint(bp0);
+        imbp2.saveBlueprint(bp1);
+        Blueprint bpToTest = ssf.filtrar(imbp2.getBlueprint("nico", "dracken"));
+        assertTrue(bpToTest.equals(bp1));
     }
     
 }

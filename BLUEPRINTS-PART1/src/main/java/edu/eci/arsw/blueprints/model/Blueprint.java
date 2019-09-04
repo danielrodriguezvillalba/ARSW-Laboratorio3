@@ -84,6 +84,18 @@ public class Blueprint {
         }
         
         return true;
+    }    
+    
+    public boolean equals(Blueprint bp) {
+    	for (int i=0;i<this.points.size();i++){
+            if (this.points.get(i).getX()!=bp.points.get(i).getX()){            	
+                return false;
+            }
+            if (this.points.get(i).getY()!=bp.points.get(i).getY()){            	
+                return false;
+            }
+        }
+    	return true;
     }
     
     
